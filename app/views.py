@@ -101,3 +101,19 @@ def index_04_03():
 def index_04_04():
     return render_template('04_04.html', title='Grid')
 
+@app.route('/index_05_01')
+def index_05_01():
+    return render_template('05_01.html', title='Grid')
+
+@app.route('/index_05_02')
+def index_05_02():
+    return render_template('05_02.html', title='Grid')
+
+@app.route('/index_05_03')
+def index_05_03():
+    return render_template('05_03.html', title='Grid')
+
+@app.route('/index_05_04')
+def index_05_04():
+    return render_template('05_04.html', title='Grid')
+
