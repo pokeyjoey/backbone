@@ -1,119 +1,51 @@
 from flask import render_template
 from app import app
 
+active_tabs = {
+    'index_active': '',
+    'calculate_active': '',
+    'history_active': '',
+    'areogator_activei': ''
+}
+
+@app.route('/zubrin_calendar')
+def zubrin_calendar():
+    return render_template('zubrin_calendar.html', title='Grid')
+
 @app.route('/')
-@app.route('/index')
-def index():
-    user = {'nickname': 'Miguel'}
+@app.route('/calendar_index')
+def calendar_index():
+    set_active_tab('index_active')
+    locals().update(active_tabs)
 
-    posts = [
-        {
-            'author':{'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author':{'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', 
-        title='Home', 
-        user=user,
-        posts=posts)
+    return render_template('calendar_index.html', **locals())
 
-@app.route('/grid')
-def grid():
-    return render_template('grid.html', title='Grid')
+@app.route('/calendar_calculate')
+def calendar_calculate():
+    set_active_tab('calculate_active')
+    locals().update(active_tabs)
 
-@app.route('/index_02_02')
-def index_02_02():
-    return render_template('02_02.html', title='Grid')
+    return render_template('calendar_calculate.html', **locals())
 
-@app.route('/index_02_03')
-def index_02_03():
-    return render_template('02_03.html', title='Grid')
+@app.route('/calendar_history')
+def calendar_history():
+    set_active_tab('history_active')
+    locals().update(active_tabs)
 
-@app.route('/index_02_04')
-def index_02_04():
-    return render_template('02_04.html', title='Grid')
+    return render_template('calendar_history.html', **locals())
 
-@app.route('/index_02_05')
-def index_02_05():
-    return render_template('02_05.html', title='Grid')
+@app.route('/calendar_areogator')
+def calendar_areogator():
+    set_active_tab('areogator_activei')
+    locals().update(active_tabs)
 
-@app.route('/index_02_06')
-def index_02_06():
-    return render_template('02_06.html', title='Grid')
+    return render_template('calendar_areogator.html', **locals())
 
-@app.route('/index_02_07')
-def index_02_07():
-    return render_template('02_07.html', title='Grid')
+def set_active_tab(active_tab):
+    for key in active_tabs.iterkeys():
+        if key == active_tab:
+            state = "active"
+        else:
+            state = ""
 
-@app.route('/index_03_01')
-def index_03_01():
-    return render_template('03_01.html', title='Grid')
-
-@app.route('/index_03_02')
-def index_03_02():
-    return render_template('03_02.html', title='Grid')
-
-@app.route('/index_03_03')
-def index_03_03():
-    return render_template('03_03.html', title='Grid')
-
-@app.route('/index_03_04')
-def index_03_04():
-    return render_template('03_04.html', title='Grid')
-
-@app.route('/index_03_05')
-def index_03_05():
-    return render_template('03_05.html', title='Grid')
-
-@app.route('/index_03_06')
-def index_03_06():
-    return render_template('03_06.html', title='Grid')
-
-@app.route('/index_03_07')
-def index_03_07():
-    return render_template('03_07.html', title='Grid')
-
-@app.route('/index_03_09')
-def index_03_09():
-    return render_template('03_09.html', title='Grid')
-
-@app.route('/index_03_08')
-def index_03_08():
-    return render_template('03_08.html', title='Grid')
-
-@app.route('/index_04_01')
-def index_04_01():
-    return render_template('04_01.html', title='Grid')
-
-@app.route('/index_04_02')
-def index_04_02():
-    return render_template('04_02.html', title='Grid')
-
-@app.route('/index_04_03')
-def index_04_03():
-    return render_template('04_03.html', title='Grid')
-
-@app.route('/index_04_04')
-def index_04_04():
-    return render_template('04_04.html', title='Grid')
-
-@app.route('/index_05_01')
-def index_05_01():
-    return render_template('05_01.html', title='Grid')
-
-@app.route('/index_05_02')
-def index_05_02():
-    return render_template('05_02.html', title='Grid')
-
-@app.route('/index_05_03')
-def index_05_03():
-    return render_template('05_03.html', title='Grid')
-
-@app.route('/index_05_04')
-def index_05_04():
-    return render_template('05_04.html', title='Grid')
-
+        active_tabs[key] = state
